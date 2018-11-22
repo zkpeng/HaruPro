@@ -19,7 +19,7 @@ void error_handler(HPDF_STATUS error_no, HPDF_STATUS detail_no, void *user_data)
 extern "C"
 JNIEXPORT jint JNICALL
 Java_com_zkp_inc_hpdfpro_MainActivity_generatePdf(JNIEnv *env, jobject instance, jstring txt,
-                                                  jint txtsize, jfloat space) {
+                                                  jint txtsize, jfloat space, jboolean lock) {
     // TODO
     HPDF_Doc pdf;
     pdf = HPDF_New(error_handler, NULL); /* set error-handler */
@@ -32,7 +32,9 @@ Java_com_zkp_inc_hpdfpro_MainActivity_generatePdf(JNIEnv *env, jobject instance,
     /* set page mode to use outlines. */
     HPDF_SetPageMode(pdf, HPDF_PAGE_MODE_USE_OUTLINE);
     /* set password */
-    HPDF_SetPassword(pdf, "owner", "user");
+    if (lock) {
+        HPDF_SetPassword(pdf, "owner", "user");
+    }
     HPDF_Page page_1;
     page_1 = HPDF_AddPage(pdf);
     HPDF_Page_SetSize(page_1, HPDF_PAGE_SIZE_B5, HPDF_PAGE_LANDSCAPE);

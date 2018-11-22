@@ -52,6 +52,14 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:text="1.5" />
+
+        <CheckBox
+            android:id="@+id/cb_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:checked="true"
+            android:text="设置密码"/>
     </LinearLayout>
 
     <Button
